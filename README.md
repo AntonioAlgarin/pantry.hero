@@ -17,7 +17,14 @@ Things you may want to cover:
 * mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
 * yarn add react-strap
 * yarn add react-router-dom@5.3.0
-*
+* bundle add rspec-rails
+* rails generate rspec:install
+* bundle add devise
+* rails generate devise:install
+* rails generate devise User
+* rails generate controller Home
+* rails db:migrate
+* rails generate devise:views
 
 - System dependencies
 

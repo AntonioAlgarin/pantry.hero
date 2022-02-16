@@ -1,12 +1,11 @@
-import React from "react"
-import PropTypes from "prop-types"
-class App extends React.Component {
-  render () {
+import React, { Component } from "react";
+
+export default class App extends Component {
+  render() {
     return (
-      <React.Fragment>
-      </React.Fragment>
+      <>
+        <h1>Hello!</h1>;
+      </>
     );
   }
 }
-
-export default App
