@@ -2,6 +2,6 @@ import React, { Component } from "react";
 
 export default class Footer extends Component {
   render() {
-    return <div>Footer</div>;
+    return <h4>Footer</h4>;
   }
 }
