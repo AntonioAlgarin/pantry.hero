@@ -15,6 +15,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       pantry: [],
+      recipes: results,
     };
   }
 
@@ -27,7 +28,18 @@ export default class App extends Component {
             <Route path="/AboutUs" component={AboutUs} />
             <Route path="/Pantry" component={Pantry} />
             <Route path="/RecipeIndex" component={RecipeIndex} />
-            <Route path="/RecipeShow" component={RecipeShow} />
+
+            <Route
+              path="/RecipeShow/:id"
+              render={(props) => {
+                let recipeId = +props.match.params.id;
+                let recipe = this.state.recipes.find(
+                  (recipe) => recipe.id === recipeId
+                );
+                return <RecipeShow recipe={recipe} />;
+              }}
+            />
+
             <Route exact path="/" component={Home} />
             <Route path="*" component={NotFound} />
           </Switch>
