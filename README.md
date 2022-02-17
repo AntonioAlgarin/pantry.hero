@@ -27,4 +27,6 @@ Things you may want to cover:
 * rails generate devise:views
 * yarn add -D enzyme react-test-renderer enzyme-adapter-react-16
 * bundle (after switching drivers)
+** Added to config/routes.rb **
+* get '*path', to: 'home#index', constraints: ->(request){ request.format.html? }
 *
