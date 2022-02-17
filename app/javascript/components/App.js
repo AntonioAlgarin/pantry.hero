@@ -7,48 +7,32 @@ import RecipeIndex from "./pages/RecipeIndex";
 import RecipeShow from "./pages/RecipeShow";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-
-
+import { pantryIngredients, japaneseFriedRice, results } from "./mockPantry";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export default class App extends Component {
-  constructor (props){
+  constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      pantry: [],
+    };
   }
-    render() {
+
+  render() {
     return (
       <>
-      <Router>
-      <Header/>
-      <Switch>
-      <Route
-        path="/AboutUs"
-        component={AboutUs}
-      />
-      <Route
-        path="/Pantry"
-        component={Pantry}
-      />
-      <Route
-        path="/RecipeIndex"
-        component={RecipeIndex}
-      />
-      <Route
-        path="/RecipeShow"
-        component={RecipeShow}
-      />
-      <Route
-        exact path="/"
-        component={Home}
-      />
-      <Route
-        path="*"
-        component={NotFound}
-      />
-      </Switch>
-      <Footer/>
-      </Router>
+        <Router>
+          <Header />
+          <Switch>
+            <Route path="/AboutUs" component={AboutUs} />
+            <Route path="/Pantry" component={Pantry} />
+            <Route path="/RecipeIndex" component={RecipeIndex} />
+            <Route path="/RecipeShow" component={RecipeShow} />
+            <Route exact path="/" component={Home} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+          <Footer />
+        </Router>
       </>
     );
   }
