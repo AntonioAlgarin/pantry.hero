@@ -27,4 +27,8 @@ Things you may want to cover:
 * rails generate devise:views
 * yarn add -D enzyme react-test-renderer enzyme-adapter-react-16
 * bundle (after switching drivers)
+  ** Added to config/routes.rb **
+* get '\*path', to: 'home#index', constraints: ->(request){ request.format.html? }
+* bin/webpack-dev-server (in a new tab on terminal when rails server is running)
+* git add -p (reviews each file before committing, it does not add new files)
 *
