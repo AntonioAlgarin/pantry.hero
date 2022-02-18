@@ -6,7 +6,7 @@ export default class RecipeIndex extends Component {
   render() {
     return (
       <>
-        <h2>RecipeIndex</h2>;
+        <h2>Recipe Index</h2>;
         <ul>
           {results.map((recipes) => {
             return (

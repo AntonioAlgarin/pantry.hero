@@ -27,7 +27,14 @@ export default class App extends Component {
           <Switch>
             <Route path="/AboutUs" component={AboutUs} />
             <Route path="/Pantry" component={Pantry} />
-            <Route path="/RecipeIndex" component={RecipeIndex} />
+
+            <Route
+              path="/RecipeIndex"
+              render={(props) => {
+                let resultsRecipes = results;
+                return <RecipeIndex recipe={resultsRecipes} />;
+              }}
+            />
 
             <Route
               path="/RecipeShow/:id"
