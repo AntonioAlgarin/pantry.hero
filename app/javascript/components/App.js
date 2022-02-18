@@ -7,7 +7,7 @@ import RecipeIndex from "./pages/RecipeIndex";
 import RecipeShow from "./pages/RecipeShow";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { pantryIngredients, japaneseFriedRice, results } from "./mockPantry";
+import { pantryIngredients, results, detailRecipe } from "./mockPantry";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export default class App extends Component {
@@ -16,6 +16,7 @@ export default class App extends Component {
     this.state = {
       pantry: [],
       recipes: results,
+      detailRecipe: detailRecipe,
     };
   }
 
@@ -40,7 +41,7 @@ export default class App extends Component {
               path="/RecipeShow/:id"
               render={(props) => {
                 let recipeId = +props.match.params.id;
-                let recipe = this.state.recipes.find(
+                let recipe = this.state.detailRecipe.find(
                   (recipe) => recipe.id === recipeId
                 );
                 return <RecipeShow recipe={recipe} />;
