@@ -15,7 +15,7 @@ Things you may want to cover:
 * rails generate react:component App
 * bundle add bootstrap
 * mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
-* yarn add react-strap
+* yarn add reactstrap
 * yarn add react-router-dom@5.3.0
 * bundle add rspec-rails
 * rails generate rspec:install

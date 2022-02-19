@@ -14,11 +14,16 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pantry: [],
+      pantry: pantryIngredients,
       recipes: results,
       detailRecipe: detailRecipe,
     };
   }
+
+  // createIngredient = (ingName) => {
+  //   let pantry = this.state.pantry.push(ingName);
+  //   this.setState({ pantry: pantry });
+  // };
 
   render() {
     return (
@@ -27,12 +32,24 @@ export default class App extends Component {
           <Header />
           <Switch>
             <Route path="/AboutUs" component={AboutUs} />
-            <Route path="/Pantry" component={Pantry} />
+
+            <Route
+              path="/Pantry"
+              render={(props) => {
+                let pantryIngredients = this.state.pantry;
+                return (
+                  <Pantry
+                    ingredients={pantryIngredients}
+                    // createIngredient={this.createIngredient}
+                  />
+                );
+              }}
+            />
 
             <Route
               path="/RecipeIndex"
               render={(props) => {
-                let resultsRecipes = results;
+                let resultsRecipes = this.state.recipes;
                 return <RecipeIndex recipe={resultsRecipes} />;
               }}
             />
