@@ -9,7 +9,7 @@ Things you may want to cover:
 
 * Created app: $rails new apartment_app -d postgresql -T
 * Connect database to rails: $db:create
-* bunde add react-rails
+* bundle add react-rails
 * rails webpacker:install:react
 * rails generate react:install
 * rails generate react:component App
@@ -31,4 +31,20 @@ Things you may want to cover:
 * get '\*path', to: 'home#index', constraints: ->(request){ request.format.html? }
 * bin/webpack-dev-server (in a new tab on terminal when rails server is running)
 * git add -p (reviews each file before committing, it does not add new files)
+* rails generate resource Ingredient food_id:integer name:string image:string quantity:integer user_id:integer
+* rails db:migrate
+* rails db:seed
+* config.sign_out_via = :delete changed to
+config.sign_out_via = :get
+* config.action_mailer.default_url_options = {
+  host: 'localhost', port: 3000 added to config/environment/development.rb
+* rails generate migration add_username_to_user
+* 
+*
+*
+*
+*
+*
+*
+*
 *
