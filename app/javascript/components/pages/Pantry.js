@@ -17,9 +17,11 @@ export default class Pantry extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       searchResults: [],
-      pantryIngredients: pantryIngredients,
+      // pantryIngredients: this.props.ingredients,
+      pantryIngredients: [],
       search: null,
       dropDownOpen: false,
+      tempList: []
     };
   }
 
@@ -40,13 +42,26 @@ export default class Pantry extends Component {
     this.setState({ search: search });
   };
 
+  readPantry = (user_id) => {
+      fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
+        .then((response) => response.json())
+        //set the state with the data from the backend into the empty array
+        .then((ingredientsArray) => this.setState({ pantryIngredients: ingredientsArray }))
+        .catch((errors) => console.log("Pantry read errors", errors));
+    };
+
+  componentDidMount(){
+    this.readPantry(this.props.current_user.id);
+  }
+
   addIngredient = (ingredient) => {
-    let { pantryIngredients } = this.state;
-    pantryIngredients.push(ingredient);
-    this.setState({ pantryIngredients: pantryIngredients });
+    let { tempList } = this.state;
+    tempList.push(ingredient);
+    this.setState({ tempList: tempList });
   };
 
   render() {
+    this.readPantry(this.props.current_user.id);
     return (
       <>
         <h2> My Pantry!</h2>
@@ -74,12 +89,23 @@ export default class Pantry extends Component {
             </DropdownMenu>
           </Dropdown>
         </div>
-
+        <h3>Temporary List</h3>
+        <ul>
+          {this.state.tempList.map((ingredient) => {
+            return (
+              <>
+               <img src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}/>
+            <li>{ingredient.name}</li>
+            </>
+          )
+          })}
+        </ul>
         <button onClick={() => this.props.createIngredient()}>
           Add Ingredient
         </button>
+        <h3>Pantry List</h3>
         <ul>
-          {pantryIngredients.map((ingredient) => {
+          {this.state.pantryIngredients.map((ingredient) => {
             return <li>{ingredient.name}</li>;
           })}
         </ul>

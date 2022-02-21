@@ -14,31 +14,43 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pantry: pantryIngredients,
+      pantry: [],
       recipes: results,
       detailRecipe: detailRecipe,
     };
   }
 
+  // const {
+  //   logged_in,
+  //   current_user,
+  //   new_user_route,
+  //   sign_in_route,
+  //   sign_out_route,
+  // } = this.props;
+
+// componentDidMount(){
+//   this.readPantry(this.props.current_user.id);
+// }
+
+// readPantry = (user_id) => {
+//     fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
+//       .then((response) => response.json())
+//       //set the state with the data from the backend into the empty array
+//       .then((ingredientsArray) => this.setState({ pantry: ingredientsArray }))
+//       .catch((errors) => console.log("Pantry read errors", errors));
+//   };
   // createIngredient = (ingName) => {
   //   let pantry = this.state.pantry.push(ingName);
   //   this.setState({ pantry: pantry });
   // };
 
   render() {
-    const {
-      logged_in,
-      current_user,
-      new_user_route,
-      sign_in_route,
-      sign_out_route,
-    } = this.props;
 
-    console.log(logged_in);
-    console.log(current_user);
-    console.log(new_user_route);
-    console.log(sign_in_route);
-    console.log(sign_out_route);
+    // console.log(logged_in);
+    // console.log(current_user);
+    // console.log(new_user_route);
+    // console.log(sign_in_route);
+    // console.log(sign_out_route);
 
     return (
       <>
@@ -54,6 +66,8 @@ export default class App extends Component {
                 return (
                   <Pantry
                     ingredients={pantryIngredients}
+                    // readPantry={this.readPantry}
+                    {...this.props}
                     // createIngredient={this.createIngredient}
                   />
                 );
