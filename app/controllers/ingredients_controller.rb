@@ -1,7 +1,7 @@
 class IngredientsController < ApplicationController
     def index
     #  if user_signed_in?
-        user = User.find(params[:id])
+        user = User.find(params[:user_id])
         pantry = user.ingredients.all
         render json: pantry
     #    else
@@ -10,7 +10,7 @@ class IngredientsController < ApplicationController
     end
     def create
     #     if user_signed_in?
-            user = User.find(params[:id])
+            user = User.find(params[:user_id])
             ingredient = user.ingredients.create(ingredient_params)
             render json: ingredient
     #     else
@@ -20,9 +20,13 @@ class IngredientsController < ApplicationController
     def update
     #     if user_signed_in?
             user = User.find(params[:user_id])
-            ingredients = user.ingredients
-            ingredients.update(quantity: params[:quantity])
-            render json: ingredients.where(["id=?",params[:id]])
+            ingredient = user.ingredients.find(params[:id])
+            ingredient.update(ingredient_params)
+            render json: ingredient
+            # user = User.find(params[:user_id])
+            # ingredients = user.ingredients
+            # ingredients.update(quantity: params[:quantity])
+            # render json: ingredients.where(["id=?",params[:id]])
 
             # User.where(["name = ? and email = ?", "Joe", "joe@example.com"])
     #     else
@@ -31,10 +35,9 @@ class IngredientsController < ApplicationController
     end
     def destroy
     #     if user_signed_in?
-            user = User.find(params[:id])
-            ingredient = user.ingredients.find(params[:food_id].to_i)
+            user = User.find(params[:user_id])
+            ingredient = user.ingredients.find(params[:id])
             ingredient.destroy
-            render json: ingredient
     #         else
     #         render json: 'please log-in you are not authorized'
     #     end
@@ -43,6 +46,6 @@ class IngredientsController < ApplicationController
 
     private
     def ingredient_params
-        params.require(:ingredient).permit(:id, :food_id, :name, :image, :quantity)
+        params.require(:ingredient).permit(:id, :food_id, :name, :image, :quantity, :user_id)
     end
 end
