@@ -8,16 +8,16 @@
 
 users = [
   {
-  username: 'kevin1',
-  email: 'kevin1@gmail.com',
-  password: 'kevin123',
-  password_confirmation: 'kevin123'
+    username: 'kevin1',
+    email: 'kevin1@gmail.com',
+    password: 'kevin123',
+    password_confirmation: 'kevin123'
   },
   {
-  username: 'justin2',
-  email: 'justin2@gmail.com',
-  password: 'justin123',
-  password_confirmation: 'justin123'
+    username: 'justin2',
+    email: 'justin2@gmail.com',
+    password: 'justin123',
+    password_confirmation: 'justin123'
   }
 ]
 

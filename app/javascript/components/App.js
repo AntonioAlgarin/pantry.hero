@@ -53,17 +53,10 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    this.readPantry(this.props.current_user.id);
+    this.props.current_user && this.readPantry(this.props.current_user);
   }
 
   render() {
-    // console.log(logged_in);
-    // console.log(current_user);
-    // console.log(new_user_route);
-    // console.log(sign_in_route);
-    // console.log(sign_out_route);
-    // console.log(this.props.api_key);
-
     return (
       <>
         <Router>

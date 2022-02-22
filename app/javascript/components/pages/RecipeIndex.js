@@ -31,7 +31,6 @@ export default class RecipeIndex extends Component {
 
   render() {
     let results = this.props.recipe;
-    console.log(this.state.searchResults);
     return (
       <>
         <h2>Recipe Index</h2>;

@@ -17,18 +17,11 @@ export default class Pantry extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       searchResults: [],
-      // pantryIngredients: this.props.ingredients,
-      // pantryIngredients: [],
       search: null,
       dropDownOpen: false,
       tempList: [],
     };
   }
-
-  // options = () => {
-  //   let { search } = this.state;
-  //   this.setState({ searchResults: pantryIngredients });
-  // };
 
   options = () => {
     let { search } = this.state;
@@ -53,16 +46,6 @@ export default class Pantry extends Component {
     search = e.target.value;
     this.setState({ search: search });
   };
-
-  // readPantry = (user_id) => {
-  //   fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
-  //     .then((response) => response.json())
-  //     //set the state with the data from the backend into the empty array
-  //     .then((ingredientsArray) =>
-  //       this.setState({ pantryIngredients: ingredientsArray })
-  //     )
-  //     .catch((errors) => console.log("Pantry read errors", errors));
-  // };
 
   addPantry = (ingredient, user_id) => {
     console.log(ingredient);
@@ -122,12 +105,6 @@ export default class Pantry extends Component {
           <Input type="text" onChange={this.handleChange} />
           <Button onClick={this.options}>search</Button>
         </Form>
-        {/*https://api.spoonacular.com/food/ingredients/search?query=banana&number=2&sort=calories&sortDirection=desc
-        <Form>
-          <Label>Quantity</Label>
-          <Input type="number" onChange={this.handleChange} />
-        </Form>*/}
-
         <div className="d-flex justify-content-center p-5">
           <Dropdown isOpen={this.state.dropDownOpen} toggle={this.toggle}>
             <DropdownToggle caret>Dropdown</DropdownToggle>
@@ -173,7 +150,6 @@ export default class Pantry extends Component {
             );
           })}
         </ul>
-
         <h3>Pantry List</h3>
         <ul>
           {this.props.ingredients.map((ingredient) => {
