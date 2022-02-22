@@ -25,10 +25,20 @@ export default class Pantry extends Component {
     };
   }
 
+  // options = () => {
+  //   let { search } = this.state;
+  //   this.setState({ searchResults: pantryIngredients });
+  // };
+
   options = () => {
     let { search } = this.state;
-    this.setState({ searchResults: pantryIngredients });
-  };
+    fetch(`https://api.spoonacular.com/food/ingredients/search?query=${search}&number=20&apiKey=${ENV["Spoonacular_API_Key"]}`)
+    .then((response) => response.json())
+    .then((ingredientsArray) =>
+      this.setState({ searchResults: ingredientsArray })
+    )
+    .catch((errors) => console.log("Pantry read errors", errors));
+    };
 
   toggle = () => {
     this.setState((prevState) => ({
@@ -107,6 +117,11 @@ export default class Pantry extends Component {
           <Input type="text" onChange={this.handleChange} />
           <Button onClick={this.options}>search</Button>
         </Form>
+        {/*https://api.spoonacular.com/food/ingredients/search?query=banana&number=2&sort=calories&sortDirection=desc
+        <Form>
+          <Label>Quantity</Label>
+          <Input type="number" onChange={this.handleChange} />
+        </Form>*/}
 
         <div className="d-flex justify-content-center p-5">
           <Dropdown isOpen={this.state.dropDownOpen} toggle={this.toggle}>
