@@ -26,7 +26,7 @@ export default class Header extends Component {
             <NavLink to="/Pantry">View Pantry</NavLink>
           </li>
           <li>
-            {logged_in && <a href={sign_in_route}>Sign Out</a>}
+            {logged_in && <a href={sign_out_route}>Sign Out</a>}
             {!logged_in && <a href={sign_in_route}>Sign In</a>}
             {!logged_in && <a href={new_user_route}>Sign Up</a>}
           </li>

@@ -25,20 +25,20 @@ export default class Pantry extends Component {
     };
   }
 
-  // options = () => {
-  //   let { search } = this.state;
-  //   this.setState({ searchResults: pantryIngredients });
-  // };
-
   options = () => {
     let { search } = this.state;
-    fetch(`https://api.spoonacular.com/food/ingredients/search?query=${search}&number=20&apiKey=${ENV["Spoonacular_API_Key"]}`)
-    .then((response) => response.json())
-    .then((ingredientsArray) =>
-      this.setState({ searchResults: ingredientsArray })
-    )
-    .catch((errors) => console.log("Pantry read errors", errors));
-    };
+    this.setState({ searchResults: pantryIngredients });
+  };
+
+  // options = () => {
+  //   let { search } = this.state;
+  //   fetch(`https://api.spoonacular.com/food/ingredients/search?query=${search}&number=20&apiKey=${ENV["Spoonacular_API_Key"]}`)
+  //   .then((response) => response.json())
+  //   .then((ingredientsArray) =>
+  //     this.setState({ searchResults: ingredientsArray })
+  //   )
+  //   .catch((errors) => console.log("Pantry read errors", errors));
+  //   };
 
   toggle = () => {
     this.setState((prevState) => ({
@@ -63,15 +63,19 @@ export default class Pantry extends Component {
   };
 
   addPantry = (ingredient, user_id) => {
+    console.log(ingredient);
+    const { id, name, image } = ingredient;
+    const addedNew = { food_id: id, name: name, image: image };
+    console.log(addedNew);
     fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`, {
-      body: JSON.stringify(ingredient),
+      body: JSON.stringify(addedNew),
       headers: {
         "Content-Type": "application/json",
       },
       method: "POST",
     })
       .then((response) => response.json())
-      .then((payload) => this.readPantry())
+      .then((payload) => this.readPantry(user_id))
       .catch((errors) => console.log("Cannot Add Ingredient:", errors));
   };
 
@@ -85,7 +89,7 @@ export default class Pantry extends Component {
       method: "DELETE",
     })
       .then((response) => response.json())
-      .then((payload) => this.readPantry())
+      .then((payload) => this.readPantry(user_id))
       .catch((errors) => console.log("delete errors:", errors));
   };
 
@@ -108,7 +112,7 @@ export default class Pantry extends Component {
   };
 
   render() {
-    this.readPantry(this.props.current_user.id);
+    // this.readPantry(this.props.current_user.id);
     return (
       <>
         <h2> My Pantry!</h2>

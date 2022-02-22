@@ -32,6 +32,7 @@ class IngredientsController < ApplicationController
             user = User.find(params[:user_id])
             ingredient = user.ingredients.find(params[:id])
             ingredient.destroy
+            render json: ingredient
     #         else
     #         render json: 'please log-in you are not authorized'
     #     end

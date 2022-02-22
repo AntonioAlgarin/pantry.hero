@@ -10,15 +10,15 @@ RSpec.describe Ingredient, type: :model do
     expect(ingredient.errors[:food_id]).to_not be_empty
   end
   it 'validates an image' do
-    ingredient = Ingredient.create
+    ingredient = Ingredient.create(name:"apple", food_id:30)
     expect(ingredient.errors[:image]).to_not be_empty
   end
-  it 'validates quantity' do
-    ingredient = Ingredient.create
-    expect(ingredient.errors[:quantity]).to_not be_empty
-  end
+  # it 'validates quantity' do
+  #   ingredient = Ingredient.create
+  #   expect(ingredient.errors[:quantity]).to_not be_empty
+  # end
   it 'validates user_id' do
-    ingredient = Ingredient.create
+    ingredient = Ingredient.create(name:"apple", food_id:30, image:"image.jpg")
     expect(ingredient.errors[:user_id]).to_not be_empty
   end
 end
