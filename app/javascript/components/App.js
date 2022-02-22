@@ -50,6 +50,7 @@ export default class App extends Component {
     // console.log(new_user_route);
     // console.log(sign_in_route);
     // console.log(sign_out_route);
+    // console.log(this.props.api_key);
 
     return (
       <>
@@ -64,6 +65,7 @@ export default class App extends Component {
                 let pantryIngredients = this.state.pantry;
                 return (
                   <Pantry
+                    api_key={this.props.api_key}
                     ingredients={pantryIngredients}
                     // readPantry={this.readPantry}
                     {...this.props}

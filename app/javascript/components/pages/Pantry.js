@@ -25,20 +25,22 @@ export default class Pantry extends Component {
     };
   }
 
-  options = () => {
-    let { search } = this.state;
-    this.setState({ searchResults: pantryIngredients });
-  };
-
   // options = () => {
   //   let { search } = this.state;
-  //   fetch(`https://api.spoonacular.com/food/ingredients/search?query=${search}&number=20&apiKey=${ENV["Spoonacular_API_Key"]}`)
-  //   .then((response) => response.json())
-  //   .then((ingredientsArray) =>
-  //     this.setState({ searchResults: ingredientsArray })
-  //   )
-  //   .catch((errors) => console.log("Pantry read errors", errors));
-  //   };
+  //   this.setState({ searchResults: pantryIngredients });
+  // };
+
+  options = () => {
+    let { search } = this.state;
+    fetch(
+      `https://api.spoonacular.com/food/ingredients/search?query=${search}&number=20&apiKey=${this.props.api_key}`
+    )
+      .then((response) => response.json())
+      .then((ingredientsArray) =>
+        this.setState({ searchResults: ingredientsArray.results })
+      )
+      .catch((errors) => console.log("Pantry read errors", errors));
+  };
 
   toggle = () => {
     this.setState((prevState) => ({
@@ -112,7 +114,6 @@ export default class Pantry extends Component {
   };
 
   render() {
-    // this.readPantry(this.props.current_user.id);
     return (
       <>
         <h2> My Pantry!</h2>
