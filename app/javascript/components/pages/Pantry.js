@@ -18,7 +18,7 @@ export default class Pantry extends Component {
     this.state = {
       searchResults: [],
       // pantryIngredients: this.props.ingredients,
-      pantryIngredients: [],
+      // pantryIngredients: [],
       search: null,
       dropDownOpen: false,
       tempList: [],
@@ -54,15 +54,15 @@ export default class Pantry extends Component {
     this.setState({ search: search });
   };
 
-  readPantry = (user_id) => {
-    fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
-      .then((response) => response.json())
-      //set the state with the data from the backend into the empty array
-      .then((ingredientsArray) =>
-        this.setState({ pantryIngredients: ingredientsArray })
-      )
-      .catch((errors) => console.log("Pantry read errors", errors));
-  };
+  // readPantry = (user_id) => {
+  //   fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
+  //     .then((response) => response.json())
+  //     //set the state with the data from the backend into the empty array
+  //     .then((ingredientsArray) =>
+  //       this.setState({ pantryIngredients: ingredientsArray })
+  //     )
+  //     .catch((errors) => console.log("Pantry read errors", errors));
+  // };
 
   addPantry = (ingredient, user_id) => {
     console.log(ingredient);
@@ -77,7 +77,7 @@ export default class Pantry extends Component {
       method: "POST",
     })
       .then((response) => response.json())
-      .then((payload) => this.readPantry(user_id))
+      .then((payload) => this.props.readPantry(user_id))
       .catch((errors) => console.log("Cannot Add Ingredient:", errors));
   };
 
@@ -91,7 +91,7 @@ export default class Pantry extends Component {
       method: "DELETE",
     })
       .then((response) => response.json())
-      .then((payload) => this.readPantry(user_id))
+      .then((payload) => this.props.readPantry(user_id))
       .catch((errors) => console.log("delete errors:", errors));
   };
 
@@ -104,7 +104,7 @@ export default class Pantry extends Component {
   };
 
   componentDidMount() {
-    this.readPantry(this.props.current_user.id);
+    this.props.readPantry(this.props.current_user.id);
   }
 
   addIngredient = (ingredient) => {
@@ -176,7 +176,7 @@ export default class Pantry extends Component {
 
         <h3>Pantry List</h3>
         <ul>
-          {this.state.pantryIngredients.map((ingredient) => {
+          {this.props.ingredients.map((ingredient) => {
             return (
               <>
                 <li>{ingredient.name}</li>

@@ -44,6 +44,18 @@ export default class App extends Component {
   //   this.setState({ pantry: pantry });
   // };
 
+  readPantry = (user_id) => {
+    fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
+      .then((response) => response.json())
+      //set the state with the data from the backend into the empty array
+      .then((ingredientsArray) => this.setState({ pantry: ingredientsArray }))
+      .catch((errors) => console.log("Pantry read errors", errors));
+  };
+
+  componentDidMount() {
+    this.readPantry(this.props.current_user.id);
+  }
+
   render() {
     // console.log(logged_in);
     // console.log(current_user);
@@ -66,6 +78,7 @@ export default class App extends Component {
                 return (
                   <Pantry
                     api_key={this.props.api_key}
+                    readPantry={this.readPantry}
                     ingredients={pantryIngredients}
                     // readPantry={this.readPantry}
                     {...this.props}
@@ -79,7 +92,12 @@ export default class App extends Component {
               path="/RecipeIndex"
               render={(props) => {
                 let resultsRecipes = this.state.recipes;
-                return <RecipeIndex recipe={resultsRecipes} />;
+                return (
+                  <RecipeIndex
+                    api_key={this.props.api_key}
+                    ingredients={pantryIngredients}
+                  />
+                );
               }}
             />
 
