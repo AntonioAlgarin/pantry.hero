@@ -23,12 +23,6 @@ class IngredientsController < ApplicationController
             ingredient = user.ingredients.find(params[:id])
             ingredient.update(ingredient_params)
             render json: ingredient
-            # user = User.find(params[:user_id])
-            # ingredients = user.ingredients
-            # ingredients.update(quantity: params[:quantity])
-            # render json: ingredients.where(["id=?",params[:id]])
-
-            # User.where(["name = ? and email = ?", "Joe", "joe@example.com"])
     #     else
     #         render json: 'please log-in you are not authorized'
     #     end

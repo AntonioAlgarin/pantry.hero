@@ -28,24 +28,23 @@ export default class App extends Component {
   //   sign_out_route,
   // } = this.props;
 
-// componentDidMount(){
-//   this.readPantry(this.props.current_user.id);
-// }
+  // componentDidMount(){
+  //   this.readPantry(this.props.current_user.id);
+  // }
 
-// readPantry = (user_id) => {
-//     fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
-//       .then((response) => response.json())
-//       //set the state with the data from the backend into the empty array
-//       .then((ingredientsArray) => this.setState({ pantry: ingredientsArray }))
-//       .catch((errors) => console.log("Pantry read errors", errors));
-//   };
+  // readPantry = (user_id) => {
+  //     fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
+  //       .then((response) => response.json())
+  //       //set the state with the data from the backend into the empty array
+  //       .then((ingredientsArray) => this.setState({ pantry: ingredientsArray }))
+  //       .catch((errors) => console.log("Pantry read errors", errors));
+  //   };
   // createIngredient = (ingName) => {
   //   let pantry = this.state.pantry.push(ingName);
   //   this.setState({ pantry: pantry });
   // };
 
   render() {
-
     // console.log(logged_in);
     // console.log(current_user);
     // console.log(new_user_route);
@@ -55,7 +54,7 @@ export default class App extends Component {
     return (
       <>
         <Router>
-          <Header />
+          <Header {...this.props} />
           <Switch>
             <Route path="/AboutUs" component={AboutUs} />
 

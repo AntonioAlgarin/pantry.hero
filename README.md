@@ -35,11 +35,15 @@ Things you may want to cover:
 * rails db:migrate
 * rails db:seed
 * config.sign_out_via = :delete changed to
-config.sign_out_via = :get
+  config.sign_out_via = :get
 * config.action_mailer.default_url_options = {
   host: 'localhost', port: 3000 added to config/environment/development.rb
 * rails generate migration add_username_to_user
-* 
+* socket 5423 not active...run this:
+  brew uninstall postgresql
+  brew install postgresql@13
+  brew services start postgresql@13
+  brew link postgresql@13 --force
 *
 *
 *

@@ -21,7 +21,7 @@ export default class Pantry extends Component {
       pantryIngredients: [],
       search: null,
       dropDownOpen: false,
-      tempList: []
+      tempList: [],
     };
   }
 
@@ -43,14 +43,51 @@ export default class Pantry extends Component {
   };
 
   readPantry = (user_id) => {
-      fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
-        .then((response) => response.json())
-        //set the state with the data from the backend into the empty array
-        .then((ingredientsArray) => this.setState({ pantryIngredients: ingredientsArray }))
-        .catch((errors) => console.log("Pantry read errors", errors));
-    };
+    fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
+      .then((response) => response.json())
+      //set the state with the data from the backend into the empty array
+      .then((ingredientsArray) =>
+        this.setState({ pantryIngredients: ingredientsArray })
+      )
+      .catch((errors) => console.log("Pantry read errors", errors));
+  };
 
-  componentDidMount(){
+  addPantry = (ingredient, user_id) => {
+    fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`, {
+      body: JSON.stringify(ingredient),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then((payload) => this.readPantry())
+      .catch((errors) => console.log("Cannot Add Ingredient:", errors));
+  };
+
+  deleteIngredient = (user_id, id) => {
+    fetch(`http://localhost:3000/ingredients/${id}`, {
+      //Convert an object to a string
+      body: JSON.stringify({ user_id, id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((payload) => this.readPantry())
+      .catch((errors) => console.log("delete errors:", errors));
+  };
+
+  deleteTemp = (id) => {
+    let { tempList } = this.state;
+    let newArr = tempList.filter((ingredient) => {
+      return ingredient.id !== id;
+    });
+    this.setState({ tempList: newArr });
+  };
+
+  componentDidMount() {
     this.readPantry(this.props.current_user.id);
   }
 
@@ -94,19 +131,47 @@ export default class Pantry extends Component {
           {this.state.tempList.map((ingredient) => {
             return (
               <>
-               <img src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}/>
-            <li>{ingredient.name}</li>
-            </>
-          )
+                <img
+                  src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
+                />
+                <li>{ingredient.name}</li>
+                <button
+                  onClick={() => {
+                    this.addPantry(ingredient, this.props.current_user.id);
+                  }}
+                >
+                  Add Ingredient
+                </button>
+                <button
+                  onClick={() => {
+                    this.deleteTemp(ingredient.id);
+                  }}
+                >
+                  Delete
+                </button>
+              </>
+            );
           })}
         </ul>
-        <button onClick={() => this.props.createIngredient()}>
-          Add Ingredient
-        </button>
+
         <h3>Pantry List</h3>
         <ul>
           {this.state.pantryIngredients.map((ingredient) => {
-            return <li>{ingredient.name}</li>;
+            return (
+              <>
+                <li>{ingredient.name}</li>
+                <button
+                  onClick={() => {
+                    this.deleteIngredient(
+                      this.props.current_user.id,
+                      ingredient.id
+                    );
+                  }}
+                >
+                  Delete
+                </button>
+              </>
+            );
           })}
         </ul>
       </>
