@@ -20,20 +20,77 @@ export default class App extends Component {
     };
   }
 
+  // const {
+  //   logged_in,
+  //   current_user,
+  //   new_user_route,
+  //   sign_in_route,
+  //   sign_out_route,
+  // } = this.props;
+
+  // componentDidMount(){
+  //   this.readPantry(this.props.current_user.id);
+  // }
+
+  // readPantry = (user_id) => {
+  //     fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
+  //       .then((response) => response.json())
+  //       //set the state with the data from the backend into the empty array
+  //       .then((ingredientsArray) => this.setState({ pantry: ingredientsArray }))
+  //       .catch((errors) => console.log("Pantry read errors", errors));
+  //   };
+  // createIngredient = (ingName) => {
+  //   let pantry = this.state.pantry.push(ingName);
+  //   this.setState({ pantry: pantry });
+  // };
+
+  readPantry = (user_id) => {
+    fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
+      .then((response) => response.json())
+      //set the state with the data from the backend into the empty array
+      .then((ingredientsArray) => this.setState({ pantry: ingredientsArray }))
+      .catch((errors) => console.log("Pantry read errors", errors));
+  };
+
+  componentDidMount() {
+    this.props.current_user && this.readPantry(this.props.current_user);
+  }
+
   render() {
     return (
       <>
         <Router>
-          <Header />
+          <Header {...this.props} />
           <Switch>
             <Route path="/AboutUs" component={AboutUs} />
-            <Route path="/Pantry" component={Pantry} />
+
+            <Route
+              path="/Pantry"
+              render={(props) => {
+                let pantryIngredients = this.state.pantry;
+                return (
+                  <Pantry
+                    api_key={this.props.api_key}
+                    readPantry={this.readPantry}
+                    ingredients={pantryIngredients}
+                    // readPantry={this.readPantry}
+                    {...this.props}
+                    // createIngredient={this.createIngredient}
+                  />
+                );
+              }}
+            />
 
             <Route
               path="/RecipeIndex"
               render={(props) => {
-                let resultsRecipes = results;
-                return <RecipeIndex recipe={resultsRecipes} />;
+                let resultsRecipes = this.state.recipes;
+                return (
+                  <RecipeIndex
+                    api_key={this.props.api_key}
+                    ingredients={pantryIngredients}
+                  />
+                );
               }}
             />
 
