@@ -7,7 +7,7 @@ import RecipeIndex from "./pages/RecipeIndex";
 import RecipeShow from "./pages/RecipeShow";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { pantryIngredients, results, detailRecipe } from "./mockPantry";
+// import { pantryIngredients, results, detailRecipe } from "./mockPantry";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export default class App extends Component {
@@ -15,8 +15,9 @@ export default class App extends Component {
     super(props);
     this.state = {
       pantry: [],
-      recipes: results,
-      detailRecipe: detailRecipe,
+      recipes: [],
+      detailRecipe: [],
+      showRecipeDetails: 648474,
     };
   }
 
@@ -56,6 +57,9 @@ export default class App extends Component {
     this.props.current_user && this.readPantry(this.props.current_user);
   }
 
+  readRecipeId = (recipeId) => {
+    this.setState({showRecipeDetails: recipeId})
+  }
   render() {
     return (
       <>
@@ -88,7 +92,8 @@ export default class App extends Component {
                 return (
                   <RecipeIndex
                     api_key={this.props.api_key}
-                    ingredients={pantryIngredients}
+                    readRecipeDetails={this.readRecipeId}
+                    ingredients={this.state.pantry}
                   />
                 );
               }}
@@ -97,12 +102,11 @@ export default class App extends Component {
             <Route
               path="/RecipeShow/:id"
               render={(props) => {
-                let recipeId = +props.match.params.id;
-                let recipe = this.state.detailRecipe.find(
-                  (recipe) => recipe.id === recipeId
-                );
-                return <RecipeShow recipe={recipe} />;
-              }}
+                return (
+                <RecipeShow
+                api_key={this.props.api_key}
+                recipeId={this.state.showRecipeDetails} />
+              )}}
             />
 
             <Route exact path="/" component={Home} />

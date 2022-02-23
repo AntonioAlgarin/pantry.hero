@@ -40,7 +40,9 @@ export default class RecipeIndex extends Component {
               return (
                 <>
                   <li>
-                    <Link to={`/RecipeShow/${recipes.id}`}>
+                    <Link to={`/RecipeShow/${recipes.id}`}
+                      onClick={()=>this.props.readRecipeDetails(recipes.id)}
+                    >
                       {recipes.title}
                     </Link>
                   </li>

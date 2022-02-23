@@ -1,24 +1,41 @@
 import React, { Component } from "react";
 
 export default class RecipeShow extends Component {
-  render() {
-    //Deconstruct props to get recipe
-    let { recipe } = this.props;
+constructor(props){
+  super(props)
+      this.state = {
+        recipe: {},
+      }
+  }
 
-    // Get Ingredients and image for Recipe
+  recipeDetails = () => {
+    fetch(
+    `https://api.spoonacular.com/recipes/${this.props.recipeId}/information?includeNutrition=true&apiKey=${this.props.api_key}`
+      )
+    .then((response) => response.json())
+    .then((recipeDetails) => this.setState({ recipe: recipeDetails }))
+    .catch((errors) => console.log("Get Recipes read errors", errors));
+    }
+    componentDidMount(){
+      this.recipeDetails()
+    }
+  render() {
+      console.log(this.state.recipe);
+    // // Get Ingredients and image for Recipe
     let requiredIngredients = []; //Create an empty array to store ingredients information.
     let ingredientTracker = {}; //Create an empty object to track ingredient.
     //ForEach step process of a recipe, store ingredients used in that step.
-    recipe.analyzedInstructions[0].steps.forEach((recipeStep) => {
-      //ForEach ingredient used in a step, store the ingredient name and image.
+    this.state.recipe.analyzedInstructions[0].steps.forEach((recipeStep) => {
+    //ForEach ingredient used in a step, store the ingredient name and image.
       recipeStep.ingredients.forEach((ingredient) => {
         if (!ingredientTracker[ingredient.name]) {
           let information = [
             ingredient.name,
             `https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`,
           ];
-          requiredIngredients.push(information); //Push the ingredient name and image to required ingredient variable
-          ingredientTracker[ingredient.name] = 1;
+          requiredIngredients.push(information);
+          //Push the ingredient name and image to required ingredient variable
+            ingredientTracker[ingredient.name] = 1;
         }
       });
     });
