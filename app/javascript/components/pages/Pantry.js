@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { pantryIngredients } from "../mockPantry";
 import {
   Form,
   Label,
@@ -48,10 +47,8 @@ export default class Pantry extends Component {
   };
 
   addPantry = (ingredient, user_id) => {
-    console.log(ingredient);
     const { id, name, image } = ingredient;
     const addedNew = { food_id: id, name: name, image: image };
-    console.log(addedNew);
     fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`, {
       body: JSON.stringify(addedNew),
       headers: {
