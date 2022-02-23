@@ -42,12 +42,12 @@ export default class RecipeShow extends Component {
   };
 
   componentDidMount() {
-    this.recipeDetails();
+    this.props.recipeId && this.recipeDetails();
   }
 
   render() {
     let { recipe, requiredIngredients } = this.state;
-    console.log(this.props);
+
     return (
       <>
         {recipe === null ? (

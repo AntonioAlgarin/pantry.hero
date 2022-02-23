@@ -84,7 +84,8 @@ export default class Pantry extends Component {
   };
 
   componentDidMount() {
-    this.props.readPantry(this.props.current_user.id);
+    this.props.current_user &&
+      this.props.readPantry(this.props.current_user.id);
   }
 
   addIngredient = (ingredient) => {
@@ -149,23 +150,26 @@ export default class Pantry extends Component {
         </ul>
         <h3>Pantry List</h3>
         <ul>
-          {this.props.ingredients.map((ingredient) => {
-            return (
-              <>
-                <li>{ingredient.name}</li>
-                <button
-                  onClick={() => {
-                    this.deleteIngredient(
-                      this.props.current_user.id,
-                      ingredient.id
-                    );
-                  }}
-                >
-                  Delete
-                </button>
-              </>
-            );
-          })}
+          <>
+            {this.props.ingredients &&
+              this.props.ingredients.map((ingredient) => {
+                return (
+                  <>
+                    <li>{ingredient.name}</li>
+                    <button
+                      onClick={() => {
+                        this.deleteIngredient(
+                          this.props.current_user.id,
+                          ingredient.id
+                        );
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </>
+                );
+              })}
+          </>
         </ul>
       </>
     );

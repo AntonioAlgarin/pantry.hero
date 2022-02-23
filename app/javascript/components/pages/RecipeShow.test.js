@@ -9,6 +9,6 @@ describe("When Recipe Index Page renders", () => {
   it("displays a Recipe Index header", () => {
     const renderedRecipeShow = shallow(<RecipeShow />);
     const recipeShowHeading = renderedRecipeShow.find("h2");
-    expect(recipeShowHeading.length).toEqual(1);
+    expect(recipeShowHeading.length).toEqual(4);
   });
 });
