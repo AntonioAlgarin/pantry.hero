@@ -18,3 +18,10 @@ describe("When App renders", () => {
     expect(renderedFooter.length).toEqual(1);
   });
 });
+// describe("When App renders", () => {
+//   it("displays router routes", () => {
+//     const app = shallow(<App />)
+//     const renderedApp = home.find("h3").text()
+//     expect(appRoutes).toEqual("")
+//   });
+// });

@@ -24,12 +24,16 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "react-test-renderer": "^17.0.2",
+    "jest-fetch-mock": "^3.0.3",
     "webpack-dev-server": "^3"
   },
   "jest": {
     "roots": [
       "app/javascript/components"
-    ]
+    ],
+    "testEnvironment": "jsdom"
+  },
+  "scripts": {
+    "test": "jest --coverage"
   }
 }
-

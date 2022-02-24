@@ -43,7 +43,7 @@ export default class RecipeIndex extends Component {
   render() {
     return (
       <>
-        <h2>Recipe Index</h2>;
+        <h2>Recipe Index</h2>
         <ul>
           {this.state.searchResults &&
             this.state.searchResults.map((recipes) => {

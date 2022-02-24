@@ -47,43 +47,42 @@ export default class RecipeShow extends Component {
 
   render() {
     let { recipe, requiredIngredients } = this.state;
-
     return (
-      <>
-        {recipe === null ? (
-          "Pending Recipe"
-        ) : (
-          <>
+      <div>
+        {recipe === null ?
+          <h2>Pending Recipe</h2>
+         :
+          <div key={1}>
             <h2>{recipe.title}</h2>
             <p>Meal prep time: {recipe.readyInMinutes} minutes</p>
             <p>Number of Servings: {recipe.servings}</p>
             <img src={`${recipe.image}`} alt="recipe photo" />
             <h2>Instructions</h2>
             {recipe.analyzedInstructions[0].steps.map((step, index) => {
-              return <li>{`${index + 1}. ${step.step}`}</li>;
+              return <li key={index}>{`${index + 1}. ${step.step}`}</li>;
             })}
             <h2>Ingredients</h2>
-            {requiredIngredients.map((ingredient) => {
+            {requiredIngredients.map((ingredient, index) => {
               return (
-                <>
+                <div key={index}>
                   <li>{ingredient[0]}</li>
                   <img src={ingredient[1]} alt="ingredient image" />
-                </>
+                </div>
               );
             })}
             <h2>Nutrients</h2>
-            {recipe.nutrition.nutrients.map((nutrientInfo) => {
+            {recipe.nutrition.nutrients.map((nutrientInfo, index) => {
               return (
-                <div>
+                <div key={index}>
                   <h5>{nutrientInfo.name}</h5>
                   <li>{`${nutrientInfo.amount}${nutrientInfo.unit}`}</li>
                   <li>{`${nutrientInfo.percentOfDailyNeeds}% Daily Value`}</li>
                 </div>
               );
             })}
-          </>
-        )}
-      </>
+          </div>
+        }
+      </div>
     );
   }
 }
