@@ -7,6 +7,7 @@ import {
   CardTitle,
   CardText,
 } from "reactstrap";
+import "../../../assets/stylesheets/RecipeIndex.css"
 
 export default class RecipeIndex extends Component {
   constructor(props) {
@@ -50,52 +51,42 @@ export default class RecipeIndex extends Component {
   render() {
     return (
       <>
-        <h2>Recipe Index</h2>
+        <p>Browse our collection of available recipes</p>
         <ul>
+        <div className="RecipeIndex-Cards">
           {this.state.searchResults &&
             this.state.searchResults.map((recipes) => {
               return (
+
                 <div>
+                <Link
+                    to={`/RecipeShow/${recipes.id}`}
+                    onClick={() => this.props.readRecipeDetails(recipes.id)}
+                    >
                   <Card inverse>
                     <CardImg
-                      alt="Card image cap"
-                      src="https://picsum.photos/318/270"
+                      alt="Recipe Index Cards"
+                      src={recipes.image}
                       width="100%"
                     />
                     <CardImgOverlay>
-                      <CardTitle tag="h5">
-                        Recipe Title
-                      </CardTitle>
                       <CardText>
-                        This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                        {recipes.title}
                       </CardText>
                       <CardText>
-                      
-                          Last updated 3 mins ago
-
+                        Number of Ingredients Used: {recipes.usedIngredientCount}
                       </CardText>
                     </CardImgOverlay>
                   </Card>
+                  </Link>
                 </div>
               )
-              // return (
-              //   <>
-              //     <li>
-              //       <Link
-              //         to={`/RecipeShow/${recipes.id}`}
-              //         onClick={() => this.props.readRecipeDetails(recipes.id)}
-              //       >
-              //         {recipes.title}
-              //       </Link>
-              //     </li>
-              //     <li>
-              //       <img src={recipes.image} />
-              //     </li>
-              //   </>
-              // );
-            })}
+            }
+          )
+        }
+            </div>
         </ul>
       </>
-    );
+    )
   }
 }

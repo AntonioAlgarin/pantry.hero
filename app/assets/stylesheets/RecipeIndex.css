@@ -1,0 +1,8 @@
+div{
+  padding: 2px;
+}
+.RecipeIndex-Cards{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
