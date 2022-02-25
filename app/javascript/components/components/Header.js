@@ -55,11 +55,13 @@ function Header(props) {
                   View Recipes
               </NavItem>
             </Link>
+            {logged_in &&
             <Link to="/Pantry" className="nav-link" onClick={closeMenu} key={3}>
               <NavItem>
                   View Pantry
               </NavItem>
             </Link>
+          }
             <Link to="/AboutUs" className="nav-link" onClick={closeMenu} key={4}>
               <NavItem>
                   About Us

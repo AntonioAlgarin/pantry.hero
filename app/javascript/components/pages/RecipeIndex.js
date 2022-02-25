@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import {
+  Card,
+  CardImg,
+  CardImgOverlay,
+  CardTitle,
+  CardText,
+} from "reactstrap";
 
 export default class RecipeIndex extends Component {
   constructor(props) {
@@ -48,20 +55,44 @@ export default class RecipeIndex extends Component {
           {this.state.searchResults &&
             this.state.searchResults.map((recipes) => {
               return (
-                <>
-                  <li>
-                    <Link
-                      to={`/RecipeShow/${recipes.id}`}
-                      onClick={() => this.props.readRecipeDetails(recipes.id)}
-                    >
-                      {recipes.title}
-                    </Link>
-                  </li>
-                  <li>
-                    <img src={recipes.image} />
-                  </li>
-                </>
-              );
+                <div>
+                  <Card inverse>
+                    <CardImg
+                      alt="Card image cap"
+                      src="https://picsum.photos/318/270"
+                      width="100%"
+                    />
+                    <CardImgOverlay>
+                      <CardTitle tag="h5">
+                        Recipe Title
+                      </CardTitle>
+                      <CardText>
+                        This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                      </CardText>
+                      <CardText>
+                      
+                          Last updated 3 mins ago
+
+                      </CardText>
+                    </CardImgOverlay>
+                  </Card>
+                </div>
+              )
+              // return (
+              //   <>
+              //     <li>
+              //       <Link
+              //         to={`/RecipeShow/${recipes.id}`}
+              //         onClick={() => this.props.readRecipeDetails(recipes.id)}
+              //       >
+              //         {recipes.title}
+              //       </Link>
+              //     </li>
+              //     <li>
+              //       <img src={recipes.image} />
+              //     </li>
+              //   </>
+              // );
             })}
         </ul>
       </>

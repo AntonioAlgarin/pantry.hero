@@ -38,7 +38,7 @@ export default class App extends Component {
           <Header {...this.props} />
           <Switch>
             <Route path="/AboutUs" component={AboutUs} />
-
+            {this.props.logged_in &&
             <Route
               path="/Pantry"
               render={(props) => {
@@ -52,7 +52,7 @@ export default class App extends Component {
                 );
               }}
             />
-
+            }
             <Route
               path="/RecipeIndex"
               render={(props) => {
