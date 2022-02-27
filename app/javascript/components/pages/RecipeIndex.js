@@ -7,7 +7,6 @@ import {
   CardTitle,
   CardText,
 } from "reactstrap";
-import "../../../assets/stylesheets/RecipeIndex.css"
 
 export default class RecipeIndex extends Component {
   constructor(props) {
@@ -51,9 +50,9 @@ export default class RecipeIndex extends Component {
   render() {
     return (
       <>
-        <p>Browse our collection of available recipes</p>
+        <h2>Browse our collection of available recipes</h2>
         <ul>
-        <div className="RecipeIndex-Cards">
+        <div className="RecipeIndex-div">
           {this.state.searchResults &&
             this.state.searchResults.map((recipes) => {
               return (
@@ -63,7 +62,7 @@ export default class RecipeIndex extends Component {
                     to={`/RecipeShow/${recipes.id}`}
                     onClick={() => this.props.readRecipeDetails(recipes.id)}
                     >
-                  <Card inverse>
+                  <Card className="RecipeIndex-cards" inverse>
                     <CardImg
                       alt="Recipe Index Cards"
                       src={recipes.image}
@@ -78,13 +77,13 @@ export default class RecipeIndex extends Component {
                       </CardText>
                     </CardImgOverlay>
                   </Card>
-                  </Link>
+                </Link>
                 </div>
               )
             }
           )
         }
-            </div>
+        </div>
         </ul>
       </>
     )

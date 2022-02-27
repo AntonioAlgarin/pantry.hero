@@ -8,7 +8,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("When About Us Page renders", () => {
   it("displays an About Us header", () => {
     const renderedAboutUs = shallow(<AboutUs />);
-    const aboutUsHeading = renderedAboutUs.find("h2");
+    const aboutUsHeading = renderedAboutUs.find("CardGroup");
     expect(aboutUsHeading.length).toEqual(1);
   });
 });

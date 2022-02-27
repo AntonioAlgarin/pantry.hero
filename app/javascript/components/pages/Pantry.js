@@ -8,6 +8,13 @@ import {
   DropdownMenu,
   DropdownToggle,
   Button,
+  CardGroup,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  CardText,
 } from "reactstrap";
 
 export default class Pantry extends Component {
@@ -22,9 +29,9 @@ export default class Pantry extends Component {
     };
   }
 
-  options = () => {
+  options = async() => {
     let { search } = this.state;
-    fetch(
+    await fetch(
       `https://api.spoonacular.com/food/ingredients/search?query=${search}&number=20&apiKey=${this.props.api_key}`
     )
       .then((response) => response.json())
@@ -58,6 +65,7 @@ export default class Pantry extends Component {
     })
       .then((response) => response.json())
       .then((payload) => this.props.readPantry(user_id))
+      .then(this.deleteTemp(ingredient.id))
       .catch((errors) => console.log("Cannot Add Ingredient:", errors));
   };
 
@@ -98,79 +106,122 @@ export default class Pantry extends Component {
     return (
       <>
         <h2> My Pantry!</h2>
-        <Form>
-          <Label>Search Ingredient</Label>
-          <Input type="text" onChange={this.handleChange} />
-          <Button onClick={this.options}>search</Button>
-        </Form>
         <div className="d-flex justify-content-center p-5">
-          <Dropdown isOpen={this.state.dropDownOpen} toggle={this.toggle}>
-            <DropdownToggle caret>Dropdown</DropdownToggle>
-            <DropdownMenu>
-              {this.state.searchResults.map((result) => {
-                return (
-                  <DropdownItem
-                    onClick={() => {
-                      this.addIngredient(result);
-                    }}
-                  >
-                    {result.name}
-                  </DropdownItem>
-                );
-              })}
-            </DropdownMenu>
-          </Dropdown>
+          <Dropdown
+            direction="end"
+            toggle={function noRefCheck() {}}
+          ></Dropdown>
+          <CardGroup>
+            <CardBody>
+              <Form>
+                <div className="search-ingredient-text">
+                  <Input
+                    placeholder="Type ingredient here"
+                    type="text"
+                    onChange={this.handleChange}
+                  />
+                  <Button onClick={this.options}>search</Button>
+                </div>
+              </Form>
+            </CardBody>
+            <CardBody>
+              <Dropdown
+                isOpen={this.state.dropDownOpen}
+                toggle={this.toggle}
+                direction="end"
+              >
+                <DropdownToggle caret>
+                  Choose Ingredient Variation
+                </DropdownToggle>
+                <DropdownMenu>
+                  {this.state.searchResults.map((result) => {
+                    return (
+                      <DropdownItem
+                        onClick={() => {
+                          this.addIngredient(result);
+                        }}
+                      >
+                        {result.name}
+                      </DropdownItem>
+                    );
+                  })}
+                </DropdownMenu>
+              </Dropdown>
+            </CardBody>
+          </CardGroup>
         </div>
-        <h3>Temporary List</h3>
-        <ul>
-          {this.state.tempList.map((ingredient) => {
-            return (
-              <>
-                <img
-                  src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
-                />
-                <li>{ingredient.name}</li>
-                <button
-                  onClick={() => {
-                    this.addPantry(ingredient, this.props.current_user.id);
-                  }}
-                >
-                  Add Ingredient
-                </button>
-                <button
-                  onClick={() => {
-                    this.deleteTemp(ingredient.id);
-                  }}
-                >
-                  Delete
-                </button>
-              </>
-            );
-          })}
-        </ul>
-        <h3>Pantry List</h3>
-        <ul>
-          <>
-            {this.props.ingredients &&
-              this.props.ingredients.map((ingredient) => {
+
+        <CardGroup>
+          <Card>
+            <CardTitle>Temporary List</CardTitle>
+            <div className="temp-list">
+              {this.state.tempList.map((ingredient) => {
                 return (
                   <>
-                    <li>{ingredient.name}</li>
-                    <button
-                      onClick={() => {
-                        this.deleteIngredient(
-                          this.props.current_user.id,
-                          ingredient.id
-                        );
-                      }}
-                    >
-                      Delete
-                    </button>
+                    <CardGroup>
+                      <Card>
+                        <CardTitle>{ingredient.name}</CardTitle>
+                        <img
+                          src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
+                        />
+                        <Button
+                          onClick={() => {
+                            this.addPantry(
+                              ingredient,
+                              this.props.current_user.id
+                            );
+                          }}
+                        >
+                          Add Ingredient
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            this.deleteTemp(ingredient.id);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </Card>
+                    </CardGroup>
                   </>
                 );
               })}
-          </>
-        </ul>
+            </div>
+          </Card>
+
+          <Card>
+            <h3>Pantry List</h3>
+            <div className="pantry-list">
+              <>
+                {this.props.ingredients &&
+                  this.props.ingredients.map((ingredient) => {
+                    return (
+                      <>
+                        <CardGroup>
+                          <Card>
+                            <CardTitle>{ingredient.name}</CardTitle>
+                            <img
+                              src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
+                            />
+                            <Button
+                              onClick={() => {
+                                this.deleteIngredient(
+                                  this.props.current_user.id,
+                                  ingredient.id
+                                );
+                              }}
+                            >
+                              Delete
+                            </Button>
+                          </Card>
+                        </CardGroup>
+                      </>
+                    );
+                  })}
+              </>
+            </div>
+          </Card>
+        </CardGroup>
       </>
     );
   }

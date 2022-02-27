@@ -15,18 +15,18 @@ export default class Footer extends Component {
       <div>
         <Card>
           <CardHeader tag="h3">
-            What do I want to add here?
+          
           </CardHeader>
             <CardBody>
               <CardTitle tag="h5">
                 Pantry Hero
               </CardTitle>
           <Button>
-            Learn More
+            Contact Us
           </Button>
             </CardBody>
           <CardFooter className="text-muted">
-            Team Uncapped
+            2022 Uncapped Stoners
           </CardFooter>
         </Card>
       </div>

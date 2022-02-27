@@ -8,7 +8,6 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
-import PantryHero from "../assets/pantry_hero_full1.png";
 import { Link } from "react-router-dom";
 
 function Header(props) {
@@ -35,12 +34,11 @@ function Header(props) {
     showButton();
   }, []);
   window.addEventListener("resize", showButton);
-
   return (
     <div>
       <Navbar color="dark" dark expand="md" light>
         <NavbarBrand href="/">
-          <img src={PantryHero} alt="Pantry Hero Logo" width="150px" />
+          <img src={props.logo} alt="Pantry Hero Logo" width="150px" />
         </NavbarBrand>
         <NavbarToggler onClick={function noRefCheck() {}} />
         <Collapse navbar>

@@ -8,7 +8,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("When Footer Page renders", () => {
   it("displays a Footer header", () => {
     const renderedFooter = shallow(<Footer />);
-    const FooterHeading = renderedFooter.find("h4");
+    const FooterHeading = renderedFooter.find("Card");
     expect(FooterHeading.length).toEqual(1);
   });
 });
