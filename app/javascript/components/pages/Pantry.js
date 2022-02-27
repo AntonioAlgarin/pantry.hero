@@ -29,7 +29,7 @@ export default class Pantry extends Component {
     };
   }
 
-  options = async() => {
+  options = async () => {
     let { search } = this.state;
     await fetch(
       `https://api.spoonacular.com/food/ingredients/search?query=${search}&number=20&apiKey=${this.props.api_key}`
@@ -55,7 +55,7 @@ export default class Pantry extends Component {
 
   addPantry = (ingredient, user_id) => {
     const { id, name, image } = ingredient;
-    const addedNew = { food_id: id, name: name, image: image };
+    const addedNew = { food_id: id, name: name, image: image, quantity: 1 };
     fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`, {
       body: JSON.stringify(addedNew),
       headers: {
@@ -69,8 +69,22 @@ export default class Pantry extends Component {
       .catch((errors) => console.log("Cannot Add Ingredient:", errors));
   };
 
-  deleteIngredient = (user_id, id) => {
+  updateIngredient = (user_id, id, quantity) => {
     fetch(`http://localhost:3000/ingredients/${id}`, {
+      //Convert an object to a string
+      body: JSON.stringify({ user_id, id, quantity }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "PATCH",
+    })
+      .then((response) => response.json())
+      .then((payload) => this.props.readPantry(user_id))
+      .catch((errors) => console.log("update errors:", errors));
+  };
+
+  deleteIngredient = async (user_id, id) => {
+    await fetch(`http://localhost:3000/ingredients/${id}`, {
       //Convert an object to a string
       body: JSON.stringify({ user_id, id }),
       headers: {
@@ -200,18 +214,52 @@ export default class Pantry extends Component {
                         <CardGroup>
                           <Card>
                             <CardTitle>{ingredient.name}</CardTitle>
+                            <CardTitle>
+                              Quantity: {ingredient.quantity}
+                            </CardTitle>
                             <img
                               src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
                             />
                             <Button
-                              onClick={() => {
-                                this.deleteIngredient(
+                              onClick={async () => {
+                                await this.deleteIngredient(
                                   this.props.current_user.id,
                                   ingredient.id
                                 );
                               }}
                             >
                               Delete
+                            </Button>
+                            <Button
+                              onClick={() => {
+                                let quantity = ingredient.quantity + 1;
+                                this.updateIngredient(
+                                  this.props.current_user.id,
+                                  ingredient.id,
+                                  quantity
+                                );
+                              }}
+                            >
+                              Add One Unit
+                            </Button>
+                            <Button
+                              onClick={() => {
+                                if (ingredient.quantity <= 1) {
+                                  this.deleteIngredient(
+                                    this.props.current_user.id,
+                                    ingredient.id
+                                  );
+                                } else {
+                                  let quantity = ingredient.quantity - 1;
+                                  this.updateIngredient(
+                                    this.props.current_user.id,
+                                    ingredient.id,
+                                    quantity
+                                  );
+                                }
+                              }}
+                            >
+                              Remove One Unit
                             </Button>
                           </Card>
                         </CardGroup>
