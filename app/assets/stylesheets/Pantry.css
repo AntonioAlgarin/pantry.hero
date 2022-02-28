@@ -1,0 +1,78 @@
+h2 {
+  font-family: "Bangers", cursive;
+  text-align: center;
+  font-size: 80px;
+  color: black;
+  text-shadow: 2px 2px #8e8a8a;
+}
+h3 {
+  font-family: "Bangers", cursive;
+  text-shadow: 2px 2px #8e8a8a;
+  text-align: center;
+  color: black;
+  padding: 15px;
+}
+
+body {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+.search-button {
+  padding-top: 5px;
+}
+
+.list-title {
+  font-family: "Bangers", cursive;
+  font-size: 60px;
+  text-shadow: 2px 2px black;
+  color: #2b9348;
+  letter-spacing: 2px;
+}
+.card-group {
+  padding: 15px;
+}
+
+.ingredient-card {
+  display: flex;
+  justify-content: center;
+}
+
+.ingredient-img {
+  padding: 10px;
+}
+
+.card-text {
+  background-color: #d9ed92;
+  text-align: center;
+}
+
+.build-pantry-img {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.temp-list-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  text-align: center;
+}
+
+.search-ingredient-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+}
+
+.temp-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 15px;
+}
+
+.pantry-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 15px;
+}

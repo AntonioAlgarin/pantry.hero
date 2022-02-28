@@ -20,8 +20,8 @@ export default class App extends Component {
     };
   }
 
-  readPantry = (user_id) => {
-    fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
+  readPantry = async(user_id) => {
+    await fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`)
       .then((response) => response.json())
       //set the state with the data from the backend into the empty array
       .then((ingredientsArray) => this.setState({ pantry: ingredientsArray }))
@@ -38,7 +38,7 @@ export default class App extends Component {
           <Header {...this.props} />
           <Switch>
             <Route path="/AboutUs" component={AboutUs} />
-
+            {this.props.logged_in &&
             <Route
               path="/Pantry"
               render={(props) => {
@@ -52,7 +52,7 @@ export default class App extends Component {
                 );
               }}
             />
-
+            }
             <Route
               path="/RecipeIndex"
               render={(props) => {

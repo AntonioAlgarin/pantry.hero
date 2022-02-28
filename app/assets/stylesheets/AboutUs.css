@@ -1,0 +1,9 @@
+.AboutUs-div{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.AboutUs-cards{
+  margin: 10px;
+  padding: 10px;
+}

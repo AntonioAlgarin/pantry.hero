@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import {
+  Card,
+  CardImg,
+  CardImgOverlay,
+  CardTitle,
+  CardText,
+} from "reactstrap";
 
 export default class RecipeIndex extends Component {
   constructor(props) {
@@ -43,28 +50,42 @@ export default class RecipeIndex extends Component {
   render() {
     return (
       <>
-        <h2>Recipe Index</h2>;
+        <h2>Browse our collection of available recipes</h2>
         <ul>
+        <div className="RecipeIndex-div">
           {this.state.searchResults &&
             this.state.searchResults.map((recipes) => {
               return (
-                <>
-                  <li>
-                    <Link
-                      to={`/RecipeShow/${recipes.id}`}
-                      onClick={() => this.props.readRecipeDetails(recipes.id)}
+
+                <div>
+                <Link
+                    to={`/RecipeShow/${recipes.id}`}
+                    onClick={() => this.props.readRecipeDetails(recipes.id)}
                     >
-                      {recipes.title}
-                    </Link>
-                  </li>
-                  <li>
-                    <img src={recipes.image} />
-                  </li>
-                </>
-              );
-            })}
+                  <Card className="RecipeIndex-cards" inverse>
+                    <CardImg
+                      alt="Recipe Index Cards"
+                      src={recipes.image}
+                      width="100%"
+                    />
+                    <CardImgOverlay>
+                      <CardText>
+                        {recipes.title}
+                      </CardText>
+                      <CardText>
+                        Number of Ingredients Used: {recipes.usedIngredientCount}
+                      </CardText>
+                    </CardImgOverlay>
+                  </Card>
+                </Link>
+                </div>
+              )
+            }
+          )
+        }
+        </div>
         </ul>
       </>
-    );
+    )
   }
 }

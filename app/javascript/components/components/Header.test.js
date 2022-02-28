@@ -8,7 +8,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("When Header renders", () => {
   it("displays a nav header", () => {
     const renderedHeader = shallow(<Header />);
-    const navHeader = renderedHeader.find("nav");
+    const navHeader = renderedHeader.find("Navbar");
     expect(navHeader.length).toEqual(1);
   });
 });
