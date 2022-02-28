@@ -119,7 +119,13 @@ export default class Pantry extends Component {
   render() {
     return (
       <>
-        <h2> My Pantry!</h2>
+        <div className="build-pantry-img">
+          <img
+            src="https://res.cloudinary.com/mikkavjimenez/image/upload/v1646029342/Pantry%20Hero/FullLogo_Transparent_NoBuffer_2_egx107.png"
+            width="600px"
+          />
+        </div>
+        <h2> Search for ingredients and add it to your personalized pantry</h2>
         <div className="d-flex justify-content-center p-5">
           <Dropdown
             direction="end"
@@ -134,7 +140,9 @@ export default class Pantry extends Component {
                     type="text"
                     onChange={this.handleChange}
                   />
-                  <Button onClick={this.options}>search</Button>
+                  <div className="search-button">
+                    <Button onClick={this.options}>Search</Button>
+                  </div>
                 </div>
               </Form>
             </CardBody>
@@ -167,34 +175,47 @@ export default class Pantry extends Component {
 
         <CardGroup>
           <Card>
-            <CardTitle>Temporary List</CardTitle>
+            <CardTitle>
+              <h3 className="list-title">Temporary List</h3>
+            </CardTitle>
             <div className="temp-list">
               {this.state.tempList.map((ingredient) => {
                 return (
                   <>
-                    <CardGroup>
+                    <CardGroup className="card-group">
                       <Card>
-                        <CardTitle>{ingredient.name}</CardTitle>
+                        <CardTitle className="card-text">
+                          {ingredient.name}
+                        </CardTitle>
                         <img
+                          className="ingredient-img"
                           src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
                         />
-                        <Button
-                          onClick={() => {
-                            this.addPantry(
-                              ingredient,
-                              this.props.current_user.id
-                            );
-                          }}
-                        >
-                          Add Ingredient
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            this.deleteTemp(ingredient.id);
-                          }}
-                        >
-                          Delete
-                        </Button>
+                        <div className="ingredient-card">
+                          <button
+                            onClick={() => {
+                              this.addPantry(
+                                ingredient,
+                                this.props.current_user.id
+                              );
+                            }}
+                          >
+                            <img
+                              src="https://res.cloudinary.com/mikkavjimenez/image/upload/v1646031691/Pantry%20Hero/add-svgrepo-com_1_xdol4e.svg"
+                              width="30px"
+                            />
+                          </button>
+                          <button
+                            onClick={() => {
+                              this.deleteTemp(ingredient.id);
+                            }}
+                          >
+                            <img
+                              src="https://res.cloudinary.com/mikkavjimenez/image/upload/v1646031720/Pantry%20Hero/trash-svgrepo-com_mm8bgh.svg"
+                              width="30px"
+                            />
+                          </button>
+                        </div>
                       </Card>
                     </CardGroup>
                   </>
@@ -204,63 +225,77 @@ export default class Pantry extends Component {
           </Card>
 
           <Card>
-            <h3>Pantry List</h3>
+            <h3 className="list-title">Pantry List</h3>
             <div className="pantry-list">
               <>
                 {this.props.ingredients &&
                   this.props.ingredients.map((ingredient) => {
                     return (
                       <>
-                        <CardGroup>
+                        <CardGroup className="card-group">
                           <Card>
-                            <CardTitle>{ingredient.name}</CardTitle>
+                            <CardTitle className="card-text">
+                              {ingredient.name}
+                            </CardTitle>
                             <CardTitle>
                               Quantity: {ingredient.quantity}
                             </CardTitle>
                             <img
+                              className="ingredient-img"
                               src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
                             />
-                            <Button
-                              onClick={async () => {
-                                await this.deleteIngredient(
-                                  this.props.current_user.id,
-                                  ingredient.id
-                                );
-                              }}
-                            >
-                              Delete
-                            </Button>
-                            <Button
-                              onClick={() => {
-                                let quantity = ingredient.quantity + 1;
-                                this.updateIngredient(
-                                  this.props.current_user.id,
-                                  ingredient.id,
-                                  quantity
-                                );
-                              }}
-                            >
-                              Add One Unit
-                            </Button>
-                            <Button
-                              onClick={() => {
-                                if (ingredient.quantity <= 1) {
-                                  this.deleteIngredient(
+                            <div className="ingredient-card">
+                              <button
+                                onClick={async () => {
+                                  await this.deleteIngredient(
                                     this.props.current_user.id,
                                     ingredient.id
                                   );
-                                } else {
-                                  let quantity = ingredient.quantity - 1;
+                                }}
+                              >
+                                <img
+                                  src="https://res.cloudinary.com/mikkavjimenez/image/upload/v1646031720/Pantry%20Hero/trash-svgrepo-com_mm8bgh.svg"
+                                  width="30px"
+                                />
+                              </button>
+                              <button
+                                onClick={() => {
+                                  let quantity = ingredient.quantity + 1;
                                   this.updateIngredient(
                                     this.props.current_user.id,
                                     ingredient.id,
                                     quantity
                                   );
-                                }
-                              }}
-                            >
-                              Remove One Unit
-                            </Button>
+                                }}
+                              >
+                                <img
+                                  src="https://res.cloudinary.com/mikkavjimenez/image/upload/v1646031691/Pantry%20Hero/add-svgrepo-com_1_xdol4e.svg"
+                                  width="30px"
+                                />
+                              </button>
+                              <button
+                                onClick={() => {
+                                  if (ingredient.quantity <= 1) {
+                                    this.deleteIngredient(
+                                      this.props.current_user.id,
+                                      ingredient.id
+                                    );
+                                  } else {
+                                    let quantity = ingredient.quantity - 1;
+                                    this.updateIngredient(
+                                      this.props.current_user.id,
+                                      ingredient.id,
+                                      quantity
+                                    );
+                                  }
+                                }}
+                              >
+                                <img
+                                  src="https://res.cloudinary.com/mikkavjimenez/image/upload/v1646031707/Pantry%20Hero/minus-svgrepo-com_1_a1hoyh.svg"
+                                  width="30px"
+                                />
+                              </button>
+                            </div>
                           </Card>
                         </CardGroup>
                       </>

@@ -63,4 +63,55 @@ describe("When Pantry Page renders", () => {
     await instance.options();
     expect(instance.state.searchResults).toEqual(pantryIngredients);
   });
+  it("invokes the updateIngredient method then calls the readPantry method", () => {
+    let { id, name, image } = pantryIngredients[0];
+    let ingredient = { id: 1, name: name, food_id: id, image: image };
+    const renderedPantry = shallow(
+      <Pantry
+        api_key={1}
+        current_user={1}
+        readPantry={jest.fn()}
+        ingredients={mockIngredients.results}
+      />
+    );
+    const instance = renderedPantry.instance();
+    instance.updateIngredient(instance.props.current_user, ingredient.id, 40);
+    expect(instance.props.readPantry).toHaveBeenCalled();
+  });
+  it("invokes the addPantry method then calls the readPantry method", () => {
+    let { id, name, image } = pantryIngredients[0];
+    let ingredient = { food_id: id, name: name, image: image, quantity: 1 };
+    const renderedPantry = shallow(
+      <Pantry
+        api_key={1}
+        current_user={1}
+        readPantry={jest.fn()}
+        ingredients={mockIngredients.results}
+      />
+    );
+    const instance = renderedPantry.instance();
+    instance.addPantry(ingredient, instance.props.current_user);
+    expect(instance.props.readPantry).toHaveBeenCalled();
+  });
+  it("invokes the deleteIngredient method then calls the readPantry method", () => {
+    let { id, name, image } = pantryIngredients[0];
+    let ingredient = {
+      id: 1,
+      food_id: id,
+      name: name,
+      image: image,
+      quantity: 1,
+    };
+    const renderedPantry = shallow(
+      <Pantry
+        api_key={1}
+        current_user={1}
+        readPantry={jest.fn()}
+        ingredients={mockIngredients.results}
+      />
+    );
+    const instance = renderedPantry.instance();
+    instance.deleteIngredient(instance.props.current_user, ingredient.id);
+    expect(instance.props.readPantry).toHaveBeenCalled();
+  });
 });
