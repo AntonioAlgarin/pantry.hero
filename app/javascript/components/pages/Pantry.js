@@ -56,7 +56,7 @@ export default class Pantry extends Component {
   addPantry = (ingredient, user_id) => {
     const { id, name, image } = ingredient;
     const addedNew = { food_id: id, name: name, image: image, quantity: 1 };
-    fetch(`http://localhost:3000/ingredients/?user_id=${user_id}`, {
+    fetch(`/ingredients/?user_id=${user_id}`, {
       body: JSON.stringify(addedNew),
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export default class Pantry extends Component {
   };
 
   updateIngredient = (user_id, id, quantity) => {
-    fetch(`http://localhost:3000/ingredients/${id}`, {
+    fetch(`/ingredients/${id}`, {
       //Convert an object to a string
       body: JSON.stringify({ user_id, id, quantity }),
       headers: {
@@ -84,7 +84,7 @@ export default class Pantry extends Component {
   };
 
   deleteIngredient = async (user_id, id) => {
-    await fetch(`http://localhost:3000/ingredients/${id}`, {
+    await fetch(`/ingredients/${id}`, {
       //Convert an object to a string
       body: JSON.stringify({ user_id, id }),
       headers: {
