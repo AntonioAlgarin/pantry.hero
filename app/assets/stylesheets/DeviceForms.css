@@ -1,0 +1,12 @@
+.signIn-backgroundImage {
+  height: 100%;
+  background-image: url("https://res.cloudinary.com/mikkavjimenez/image/upload/v1646088250/Pantry%20Hero/AdobeStock_186979059_fmqyfs.jpg");
+  background-size: cover;
+  margin: 0;
+  padding-top: 48px;
+}
+
+.text-color {
+  color: white;
+  text-decoration: none;
+}
