@@ -13,7 +13,7 @@ describe("When Recipe Index Page renders", () => {
     const renderedRecipeIndex = shallow(
       <RecipeIndex current_user={{ id: 1 }} />
     );
-    const recipeIndexHeading = renderedRecipeIndex.find("h2");
+    const recipeIndexHeading = renderedRecipeIndex.find("ul");
     expect(recipeIndexHeading.length).toEqual(1);
   });
 });

@@ -15,18 +15,15 @@ export default class Footer extends Component {
       <div>
         <Card>
           <CardHeader tag="h3">
-          
+
           </CardHeader>
             <CardBody>
               <CardTitle tag="h5">
                 Pantry Hero
               </CardTitle>
-          <Button>
-            Contact Us
-          </Button>
             </CardBody>
-          <CardFooter className="text-muted">
-            2022 Uncapped Stoners
+          <CardFooter className="d-flex justify-content-center text-muted">
+            © 2022 Uncapped Stoners
           </CardFooter>
         </Card>
       </div>

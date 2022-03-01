@@ -6,21 +6,15 @@ import {
   UncontrolledAccordion,
   Button,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export default class Home extends Component {
   render() {
     return (
       <>
       <div className="HomeBackgroundImage">
-      <h2>Feeling like you can't figure out what to make for dinner? Let us help.</h2>
-      <div>
-  <Button
-    color="primary"
-  >
-    Get Started
-  </Button>
-    </div>
-      <p>Longer description of why you should check out our app</p>
+      <img className="build-pantry-img"src="https://res.cloudinary.com/mikkavjimenez/image/upload/v1646109271/Pantry%20Hero/catchphrase.png_qxgmrb.png" width="850px">
+      </img>
       </div>
       </>
     )
