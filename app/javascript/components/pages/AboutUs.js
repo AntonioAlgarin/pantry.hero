@@ -128,7 +128,7 @@ export default class AboutUs extends Component {
                 />
                 </Button>
                 </a>
-                <a href="https://www.linkedin.com/in/antonioalgarin/" target="_blank">
+                <a href="https://github.com/AntonioAlgarin" target="_blank">
                 <Button className="btn btn-light">
                 <img
                   src="https://res.cloudinary.com/mikkavjimenez/image/upload/v1646084023/Pantry%20Hero/github-code-source-svgrepo-com_qhb56f.svg"

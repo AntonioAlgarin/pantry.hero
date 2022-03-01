@@ -16,6 +16,7 @@ import {
   CardSubtitle,
   CardText,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export default class Pantry extends Component {
   constructor(props) {
@@ -305,6 +306,11 @@ export default class Pantry extends Component {
             </div>
           </Card>
         </CardGroup>
+        <Link to="/RecipeIndex">
+          <Button color="warning">
+            View Recipes
+          </Button>
+        </Link>
       </>
     );
   }
