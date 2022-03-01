@@ -19,7 +19,7 @@ export default class RecipeIndex extends Component {
 
   getRecipes = () => {
     fetch(
-      `http://localhost:3000/ingredients/?user_id=${this.props.current_user.id}`
+      `/ingredients/?user_id=${this.props.current_user.id}`
     )
       .then((response) => response.json())
       //set the state with the data from the backend into the empty array
