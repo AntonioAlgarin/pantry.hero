@@ -7542,7 +7542,7 @@ react_ujs@^2.6.0, react_ujs@^2.6.1:
   dependencies:
     react_ujs "^2.6.0"
 
-reactstrap@^0.0.1:
+reactstrap@^9.0.1:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/reactstrap/-/reactstrap-9.0.1.tgz#a6b205861f3e83da55063bc04ba1a069e969f21d"
   integrity sha512-89VOv7SRlAlpS7RwXhzOQkSWkuhBR8LBsPGfNHifNL3WhtNP9y1sBdTcTYyH1ee2QtI8zRdwD0T5I/blHiwemg==
