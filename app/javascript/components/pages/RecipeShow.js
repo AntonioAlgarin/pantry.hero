@@ -86,12 +86,13 @@ export default class RecipeShow extends Component {
                     <CardGroup className="card-group">
                       {requiredIngredients.map((ingredient, index) => {
                         return (
-                          <Card className="ingredient-card">
-                            <div key={index}>
+                          <div key={index}>
+                            <Card className="ingredient-card">
                               <CardTitle>{ingredient[0]}</CardTitle>
                               <img src={ingredient[1]} alt="ingredient image" />
-                            </div>
-                          </Card>
+                            </Card>
+                          </div>
+
                         );
                       })}
                     </CardGroup>
