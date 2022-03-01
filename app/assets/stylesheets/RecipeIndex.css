@@ -6,3 +6,15 @@
 .RecipeIndex-cards{
   margin: 10px;
 }
+.card-font-color{
+  color: #2b9348;
+}
+.browse-recipes-img {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+.card-text{
+  background-color: #d9ed92;
+  text-align: center;
+}

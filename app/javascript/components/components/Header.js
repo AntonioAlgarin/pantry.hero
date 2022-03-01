@@ -7,6 +7,8 @@ import {
   NavbarToggler,
   NavItem,
   NavLink,
+  Button,
+  NavbarText,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -38,11 +40,11 @@ function Header(props) {
     <div>
       <Navbar color="dark" dark expand="md" light>
         <NavbarBrand href="/">
-          <img src={props.logo} alt="Pantry Hero Logo" width="150px" />
+          <img src={props.logo} alt="Pantry Hero Logo" width="100px"/>
         </NavbarBrand>
         <NavbarToggler onClick={function noRefCheck() {}} />
         <Collapse navbar>
-          <Nav className="me-auto" navbar>
+          <Nav navbar>
             <Link to="/" onClick={closeMenu} className="nav-link" key={1}>
               <NavItem>
                   Home
@@ -71,10 +73,17 @@ function Header(props) {
               <NavItem className="nav-link"><a href={sign_in_route}>Sign In</a></NavItem>}
             {!logged_in &&
               <NavItem className="nav-link"><a href={new_user_route}>Sign Up</a></NavItem>}
+              {logged_in &&
+              <Link to="/Pantry" className="nav-link" onClick={closeMenu} key={8}>
+              <Button color="success">
+                  Get Started
+              </Button>
+              </Link>}
           </Nav>
         </Collapse>
       </Navbar>
       </div>
+
   );
 }
 export default Header;

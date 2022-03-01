@@ -50,13 +50,17 @@ export default class RecipeIndex extends Component {
   render() {
     return (
       <>
-        <h2>Browse our collection of available recipes</h2>
+      <div className="browse-recipes-img">
+        <img
+          src="https://res.cloudinary.com/mikkavjimenez/image/upload/v1646072386/Pantry%20Hero/Recipes_t9cjjw.png"
+          width="600px"
+        />
+        </div>
         <ul>
         <div className="RecipeIndex-div">
           {this.state.searchResults &&
             this.state.searchResults.map((recipes) => {
               return (
-
                 <div>
                 <Link
                     to={`/RecipeShow/${recipes.id}`}
@@ -69,10 +73,10 @@ export default class RecipeIndex extends Component {
                       width="100%"
                     />
                     <CardImgOverlay>
-                      <CardText>
+                      <CardText className="card-font-color">
                         {recipes.title}
                       </CardText>
-                      <CardText>
+                      <CardText className="card-font-color">
                         Number of Ingredients Used: {recipes.usedIngredientCount}
                       </CardText>
                     </CardImgOverlay>

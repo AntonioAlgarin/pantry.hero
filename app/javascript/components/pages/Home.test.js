@@ -8,7 +8,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("When Home renders", () => {
   it("displayes a home header", () => {
     const renderedHome = shallow(<Home />);
-    const homeHeading = renderedHome.find("h2");
+    const homeHeading = renderedHome.find("img");
     expect(homeHeading.length).toEqual(1);
   });
 });

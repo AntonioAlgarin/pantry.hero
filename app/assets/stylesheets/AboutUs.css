@@ -7,3 +7,12 @@
   margin: 10px;
   padding: 10px;
 }
+.card-title {
+  text-align: center;
+}
+.card-subtitle {
+  text-align: center;
+}
+.card-text{
+  text-align: center;
+}
