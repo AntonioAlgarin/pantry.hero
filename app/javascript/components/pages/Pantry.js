@@ -184,7 +184,7 @@ export default class Pantry extends Component {
                   <>
                     <CardGroup className="card-group">
                       <Card>
-                        <CardTitle className="card-text">
+                        <CardTitle className="pantry-card-text">
                           {ingredient.name}
                         </CardTitle>
                         <img
@@ -234,7 +234,7 @@ export default class Pantry extends Component {
                       <>
                         <CardGroup className="card-group">
                           <Card>
-                            <CardTitle className="card-text">
+                            <CardTitle className="pantry-card-text">
                               {ingredient.name}
                             </CardTitle>
                             <CardTitle>
