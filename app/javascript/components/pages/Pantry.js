@@ -306,11 +306,12 @@ export default class Pantry extends Component {
             </div>
           </Card>
         </CardGroup>
-        <Link to="/RecipeIndex">
-          <Button color="warning">
-            View Recipes
-          </Button>
-        </Link>
+
+        <div className="button-styling">
+          <Link to="/RecipeIndex">
+            <Button color="warning">Generate Recipes</Button>
+          </Link>
+        </div>
       </>
     );
   }
